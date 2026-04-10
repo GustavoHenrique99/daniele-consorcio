@@ -35,6 +35,13 @@
     </script>
 
     <style>
+        /* Prevenção de vazamento horizontal */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+
         /* Glassmorphism Effect */
         .glass {
             background: rgba(255, 255, 255, 0.7);
@@ -52,6 +59,14 @@
 
         html {
             scroll-behavior: smooth;
+        }
+
+        /* Previne que elementos AOS causem espaço em branco antes de animar */
+        [data-aos] {
+            pointer-events: none;
+        }
+        .aos-animate {
+            pointer-events: auto;
         }
     </style>
 </head>
@@ -114,7 +129,7 @@
         </div>
     </section>
 
-    <section id="destaques" class="py-24 bg-softblue">
+    <section id="destaques" class="py-24 bg-softblue overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16" data-aos="fade-up">
                 <h2 class="font-playfair text-3xl md:text-4xl font-bold text-navy mb-4">O Poder do Consórcio</h2>
@@ -155,7 +170,7 @@
         </div>
     </section>
 
-    <section id="sobre" class="py-24 bg-offwhite">
+    <section id="sobre" class="py-24 bg-offwhite overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col lg:flex-row items-center gap-16">
                 <div class="w-full lg:w-1/2 relative" data-aos="fade-right">
@@ -373,6 +388,9 @@
         AOS.init({
             once: true,
             offset: 100,
+            disableMutationObserver: false,
+            debounceDelay: 50,
+            throttleDelay: 99,
         });
 
         // Mobile Menu Toggle
